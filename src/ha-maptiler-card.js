@@ -1,13 +1,10 @@
 import * as maptilersdk from "@maptiler/sdk";
 import sdkCss from "@maptiler/sdk/dist/maptiler-sdk.css";
 
-const CARD_VERSION = "0.1.0";
+const CARD_VERSION = "0.1.1";
 const DEFAULT_CENTER = [0, 0];
 const DEFAULT_ZOOM = 2;
 const DEFAULT_STYLE = "streets-v2";
-const styleSheet = document.createElement("style");
-styleSheet.textContent = sdkCss;
-document.head.appendChild(styleSheet);
 
 function coordinates(attributes) {
   const lat = Number(attributes?.latitude);
@@ -93,6 +90,7 @@ class HaMaptilerCard extends HTMLElement {
   _renderShell() {
     const height = typeof this._config.height === "number" ? `${this._config.height}px` : this._config.height;
     this.shadowRoot.innerHTML = `
+      <style id="maptiler-sdk-style"></style>
       <style>
         :host { display:block; } ha-card { overflow:hidden; }
         .title { padding:16px 16px 0; font-size:var(--ha-card-header-font-size,24px); color:var(--primary-text-color); }
@@ -109,6 +107,7 @@ class HaMaptilerCard extends HTMLElement {
         ${this._config.title ? '<div class="title"></div>' : ""}
         <div id="map"></div><div class="error" hidden></div>
       </ha-card>`;
+    this.shadowRoot.querySelector("#maptiler-sdk-style").textContent = sdkCss;
     const title = this.shadowRoot.querySelector(".title");
     if (title) title.textContent = this._config.title;
   }
