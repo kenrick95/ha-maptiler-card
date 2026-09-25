@@ -1,0 +1,17 @@
+{
+  "name": "ha-maptiler-card",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MapTiler map card for Home Assistant",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "lint": "eslint src scripts"
+  },
+  "dependencies": {
+    "@maptiler/sdk": "^4.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "eslint": "^9.0.0"
+  }
+}
